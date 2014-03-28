@@ -41,12 +41,10 @@ class change_dir():
 def accumulate_stats(fobj, id_name_map):
     '''
     '''
-    # [team_id]: [gamescores against all opponents]
+    # dict of score for a teams list of opponents
     list_gamescores = defaultdict(list)
-    # [team_id]: [team_ids of all opponents]
+    # dict of ids for a teams list of opponents
     list_opponents = defaultdict(list)
-    # [season][team_id]: mean of scores
-    #mean_gamescores = defaultdict(float)
 
     titles = fobj.readline().split(',')
     for l, game in enumerate(fobj):
@@ -55,8 +53,8 @@ def accumulate_stats(fobj, id_name_map):
         win_id, win_score = int(fields[2]), int(fields[3])
         los_id, los_score = int(fields[4]), int(fields[5])
         home_won = fields[6] == 'H'
-        list_gamescores[win_id].append((win_score - los_score))
-        list_gamescores[los_id].append((los_score - win_score))
+        list_gamescores[win_id].append(game_score(win_score - los_score))
+        list_gamescores[los_id].append(game_score(los_score - win_score))
         list_opponents[win_id].append(los_id)
         list_opponents[los_id].append(win_id)
         # teams can play each other more than once
@@ -94,16 +92,16 @@ def sparse_visual(M):
                 print("{0}:{1} ".format(j,M[i][j]), end="")
         print()
 
-def prep_rating_matrix(fname, parent_folder, type_name):
+def prep_rating_matrix(teamnames, parent_folder, type_name):
     '''
     '''
-    id_name_map = build_teams(fname)
+    id_name_map = build_teams(teamnames)
     print(id_name_map)
 
     fname = "Ymatrix"
     idname = "idMap.json"
     indexname = "indexMap.json"
-    #file_dir = os.path.dirname( os.path.abspath(file_name) )
+    
     dir_names = []
     with change_dir(parent_folder):
         dir_names = glob.glob( type_name + "*" )

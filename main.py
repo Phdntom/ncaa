@@ -36,9 +36,10 @@ def factorize_seasons(parent_folder, type_name):
             Y = np.load(path)
             print( Y.shape)
             print(Y)
-            print(sum(sum(Y != 0))
+            print(sum(sum(Y != 0)))
             nP, nQ = grad_descent_factorization(Y, K=10, steps=5000,
-                                                alpha=0.03, lamda=0.002)
+                                                alpha=0.01, lamda=0.002,
+                                                disp=True)
             eY = np.dot(nP, nQ.T)
             print(max(abs(eY * (Y != 0).astype(int) - Y).flatten()) )
             with change_dir(dirname):

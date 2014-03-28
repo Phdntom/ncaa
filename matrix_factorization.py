@@ -73,11 +73,13 @@ def log_grad(params, Y, R, K, lamda):
 def linear_grad(params, Y, R, K, lamda):
     '''
     '''
+    # Reshape params vector into our P and Q matrices
     N, M = Y.shape
     split_idx = N * K
     P = params[:split_idx].reshape(N, K)
     Q = params[split_idx:].reshape(M, K)
 
+    # We will return a gradient for each entry in P and Q
     P_grad = np.zeros(P.shape)
     Q_grad = np.zeros(Q.shape)
 
@@ -90,6 +92,7 @@ def linear_grad(params, Y, R, K, lamda):
     P_grad += lamda * P
     Q_grad += lamda * Q
 
+    # Restack the P and Q matrix into a params gradient
     grad = np.hstack([P_grad.flatten(),Q_grad.flatten()])
 
     return grad
@@ -147,8 +150,8 @@ def grad_descent_factorization(Y, P=None, Q=None, K=10,
             Q_cur = params[split_idx:].reshape(M, K)
             eY = np.dot(P_cur, Q_cur.T)
             err = max(abs(eY * R - Y).flatten())
-            print("{0}, C={1:.2f}, Err={2:.2f}, CI={3:.3%}, EI={4:.2%}".format(steps,
-                                       J, err, J/J_prev, err/err_prev))
+            print("{0}, C={1:.2f}, Err={2:.2f}, CI={3:.3%}, EI={4:.2%}"
+                        .format(steps,J, err, J/J_prev, err/err_prev))
 
 
         if abs(J_prev - J) < eps0:

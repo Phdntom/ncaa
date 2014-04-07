@@ -1,5 +1,19 @@
-ncaa
+NCAA
 ====
+The goal of this project is to develop a collection of scripts/routines to help predict the odds of the NCAA tournament. To clarify, these programs do NOT build a "perfect bracket", they predict the odds! (Of course if you wanted to just go with the odds, you could use this to make a bracket, purely from machine predictions)
+
+This project started in 2014 with a Kaggle competition but the great thing about the tourney is, it happens every year.
+
+The input data may grow/change depending on what seems to be working, and what information is available/reliable.
+
+CURRENT Modules
+===============
+Two current prediction attempts exist:
+
+1) Chessrank metric; "chessrank"
+
+2) Matrix Factorization / Collaborate Filtering; "matrix_factorization"
+
 
 split_seasons.py
 ----------------

@@ -5,10 +5,10 @@ import glob as glob
 from collections import defaultdict
 import json as json
 
-from os_manip_utilities import change_dir
-from scoring import game_score, point_diff
-from splitseasons import split_seasons
-from TeamStats import team_stats
+from ncaa_lib.os_manip_utilities import change_dir
+from ncaa_lib.scoring import game_score, point_diff
+from ncaa_lib.split_seasons import split_seasons
+from ncaa_lib.TeamStats import team_stats
 
 def record_game(teams, win_id, win_score, los_id, los_score, home=None):
     '''

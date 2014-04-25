@@ -83,7 +83,6 @@ def accumulate_stats(fobj, id_name_map):
 
     return Y, idToIndex, indexToID
 
-def process_season(
 
 
 def prep_rating_matrix(teamnames, parent_folder, type_name):

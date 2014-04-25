@@ -3,9 +3,9 @@ import numpy as np
 import os
 import glob
 
-from splitseasons import split_seasons
-from season_accumulator import prep_rating_matrix
-from matrix_factorization import grad_descent_factorization
+from ncaa_lib.split_seasons import split_seasons
+from ncaa_lib.season_accumulator import prep_rating_matrix
+from ncaa_lib.matrix_factorization import grad_descent_factorization
 
 
 class change_dir():
@@ -51,10 +51,10 @@ def main():
     parent_folder = "metadata"
     type_name = "season"
 
-    season_fname = "data/regular_season_results.csv"
+    season_fname = "../data/regular_season_results.csv"
     split_seasons(season_fname, parent_folder, type_name)
 
-    team_fname = "data/teams.csv"
+    team_fname = "../data/teams.csv"
     prep_rating_matrix(team_fname, parent_folder, type_name)
 
     factorize_seasons(parent_folder, type_name)
